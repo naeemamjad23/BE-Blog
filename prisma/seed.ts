@@ -1,20 +1,23 @@
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
 import * as bcrypt from 'bcrypt';
 
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  // Seed 8 Cybersecurity Domains
+  // Seed 9 Cybersecurity Domains (CISSP-aligned with sub-domains)
   const domains = [
-    { name: 'Application Security', slug: 'appsec', description: 'OWASP, secure coding, SAST/DAST, API security', icon: 'Shield', color: '#EF4444', sortOrder: 1 },
-    { name: 'Network Security', slug: 'network-security', description: 'Firewalls, IDS/IPS, zero trust, VPN, segmentation', icon: 'Network', color: '#3B82F6', sortOrder: 2 },
-    { name: 'Cloud Security', slug: 'cloud-security', description: 'AWS/Azure/GCP hardening, CSPM, container security', icon: 'Cloud', color: '#8B5CF6', sortOrder: 3 },
-    { name: 'Threat Intelligence', slug: 'threat-intelligence', description: 'Threat hunting, IOCs, MITRE ATT&CK, malware analysis', icon: 'Search', color: '#F59E0B', sortOrder: 4 },
-    { name: 'GRC', slug: 'grc', description: 'Governance, Risk & Compliance — ISO 27001, SOC 2, NIST, risk frameworks', icon: 'FileCheck', color: '#10B981', sortOrder: 5 },
-    { name: 'Penetration Testing', slug: 'pentesting', description: 'Red team, recon, exploitation, reporting, CTFs', icon: 'Target', color: '#EC4899', sortOrder: 6 },
-    { name: 'SOC & Incident Response', slug: 'soc-ir', description: 'SIEM, detection engineering, IR playbooks, forensics', icon: 'AlertTriangle', color: '#F97316', sortOrder: 7 },
-    { name: 'Secure Development', slug: 'devsecops', description: 'CI/CD security, IaC scanning, SBOM, shift-left', icon: 'Code', color: '#06B6D4', sortOrder: 8 },
+    { name: 'Security & Risk Management', slug: 'security-risk-management', description: 'Risk management, governance, policies, compliance, audit, vendor risk, BCP/DR', icon: 'FileCheck', color: '#10B981', sortOrder: 1 },
+    { name: 'Asset Security', slug: 'asset-security', description: 'Data classification, lifecycle management, encryption, DLP, privacy, database security, backup & recovery', icon: 'Database', color: '#84CC16', sortOrder: 2 },
+    { name: 'Security Architecture & Engineering', slug: 'security-architecture', description: 'Secure design, threat modeling, cryptography, hardware security, zero trust architecture', icon: 'Building', color: '#0EA5E9', sortOrder: 3 },
+    { name: 'Communication & Network Security', slug: 'network-security', description: 'Network architecture, segmentation, secure protocols, firewalls, IDS/IPS, wireless, IoT & OT/ICS security', icon: 'Network', color: '#3B82F6', sortOrder: 4 },
+    { name: 'Identity & Access Management', slug: 'iam', description: 'Authentication, authorization, federation, PAM, identity lifecycle, zero trust identity', icon: 'Key', color: '#6366F1', sortOrder: 5 },
+    { name: 'Security Assessment & Testing', slug: 'security-assessment', description: 'Vulnerability assessment, scanning, penetration testing, red teaming, security audits, bug bounty', icon: 'Target', color: '#EC4899', sortOrder: 6 },
+    { name: 'Security Operations', slug: 'security-operations', description: 'SIEM/XDR, threat hunting, incident response, digital forensics, threat intelligence, SOAR', icon: 'AlertTriangle', color: '#F97316', sortOrder: 7 },
+    { name: 'Software Development Security', slug: 'software-development-security', description: 'Secure SDLC, DevSecOps, application & API security, SAST/DAST/IAST, AI/ML & LLM security', icon: 'Code', color: '#EF4444', sortOrder: 8 },
+    { name: 'Cloud & Platform Security', slug: 'cloud-platform-security', description: 'Cloud infrastructure, identity & misconfiguration, containers & Kubernetes, serverless, endpoint & device security, virtualization', icon: 'Cloud', color: '#8B5CF6', sortOrder: 9 },
   ];
 
   for (const domain of domains) {
@@ -24,7 +27,7 @@ async function main() {
       create: domain,
     });
   }
-  console.log('Seeded 8 cybersecurity domains');
+  console.log('Seeded 9 cybersecurity domains');
 
   // Seed admin user
   const passwordHash = await bcrypt.hash('SecureMango@Admin2024', 12);
