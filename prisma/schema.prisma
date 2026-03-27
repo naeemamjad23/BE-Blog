@@ -1,0 +1,176 @@
+// Prisma Schema for SecureMango Blog Platform
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// --- Core Content ---
+
+model Post {
+  id            String    @id @default(cuid())
+  title         String
+  slug          String    @unique
+  excerpt       String
+  content       String
+  coverImage    String?
+  published     Boolean   @default(false)
+  publishedAt   DateTime?
+  featured      Boolean   @default(false)
+
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+  canonicalUrl    String?
+  ogImage         String?
+
+  // Monetization
+  isPremium   Boolean @default(false)
+  isSponsored Boolean @default(false)
+  sponsorName String?
+  sponsorUrl  String?
+
+  // Relations
+  domainId    String
+  domain      Domain    @relation(fields: [domainId], references: [id])
+  seriesId    String?
+  series      Series?   @relation(fields: [seriesId], references: [id])
+  seriesOrder Int?
+  authorId    String
+  author      Author    @relation(fields: [authorId], references: [id])
+  tags        PostTag[]
+  comments    Comment[]
+
+  // Tracking
+  viewCount   Int @default(0)
+  readTimeMin Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([domainId])
+  @@index([publishedAt])
+  @@index([featured])
+}
+
+model Domain {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String
+  icon        String?
+  color       String?
+  sortOrder   Int      @default(0)
+  posts       Post[]
+  series      Series[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Series {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  difficulty  String
+  coverImage  String?
+  domainId    String
+  domain      Domain   @relation(fields: [domainId], references: [id])
+  posts       Post[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([domainId])
+}
+
+model Author {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  bio       String?
+  avatar    String?
+  twitter   String?
+  linkedin  String?
+  github    String?
+  posts     Post[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tag {
+  id    String    @id @default(cuid())
+  name  String    @unique
+  slug  String    @unique
+  posts PostTag[]
+}
+
+model PostTag {
+  postId String
+  tagId  String
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([postId, tagId])
+}
+
+// --- Lead Generation ---
+
+model Subscriber {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  name            String?
+  source          String?
+  leadMagnet      String?
+  domainInterests String[]
+  verified        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([email])
+}
+
+model LeadMagnet {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  fileUrl     String
+  coverImage  String?
+  domainId    String?
+  downloads   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// --- Engagement ---
+
+model Comment {
+  id          String   @id @default(cuid())
+  content     String
+  authorName  String
+  authorEmail String
+  postId      String
+  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  parentId    String?
+  approved    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([postId])
+}
+
+// --- Admin ---
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("editor")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
