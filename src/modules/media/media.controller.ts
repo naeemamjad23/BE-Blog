@@ -16,6 +16,16 @@ export class MediaController {
     return this.mediaService.upload(file);
   }
 
+  @Post(':filename/compress')
+  compress(@Param('filename') filename: string) {
+    return this.mediaService.compress(filename);
+  }
+
+  @Post(':filename/webp')
+  convertToWebp(@Param('filename') filename: string) {
+    return this.mediaService.convertToWebp(filename);
+  }
+
   @Get()
   list() {
     return this.mediaService.list();
