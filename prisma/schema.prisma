@@ -36,6 +36,7 @@ model Post {
   // Relations
   domainId    String
   domain      Domain    @relation(fields: [domainId], references: [id])
+  subDomain   String?
   seriesId    String?
   series      Series?   @relation(fields: [seriesId], references: [id])
   seriesOrder Int?

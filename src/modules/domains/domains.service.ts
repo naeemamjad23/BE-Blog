@@ -7,11 +7,30 @@ import { UpdateDomainDto } from './dto/update-domain.dto.js';
 export class DomainsService {
   constructor(private prisma: PrismaService) {}
 
-  findAll() {
-    return this.prisma.domain.findMany({
-      orderBy: { sortOrder: 'asc' },
-      include: { _count: { select: { posts: true, series: true } } },
-    });
+  async findAll() {
+    const [domains, subDomainCounts] = await Promise.all([
+      this.prisma.domain.findMany({
+        orderBy: { sortOrder: 'asc' },
+        include: { _count: { select: { posts: true, series: true } } },
+      }),
+      this.prisma.post.groupBy({
+        by: ['domainId', 'subDomain'],
+        where: { published: true, subDomain: { not: null } },
+        _count: true,
+      }),
+    ]);
+
+    const countMap = new Map<string, Record<string, number>>();
+    for (const row of subDomainCounts) {
+      if (!row.subDomain) continue;
+      if (!countMap.has(row.domainId)) countMap.set(row.domainId, {});
+      countMap.get(row.domainId)![row.subDomain] = row._count;
+    }
+
+    return domains.map((d) => ({
+      ...d,
+      subDomainCounts: countMap.get(d.id) || {},
+    }));
   }
 
   async findBySlug(slug: string) {

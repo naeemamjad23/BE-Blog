@@ -26,6 +26,9 @@ export class CreatePostDto {
   @ApiPropertyOptional() @IsOptional() @IsString() sponsorName?: string;
   @ApiPropertyOptional() @IsOptional() @IsString() sponsorUrl?: string;
 
+  // Sub-domain
+  @ApiPropertyOptional() @IsOptional() @IsString() subDomain?: string;
+
   // Series
   @ApiPropertyOptional() @IsOptional() @IsString() seriesId?: string;
   @ApiPropertyOptional() @IsOptional() @IsInt() seriesOrder?: number;

@@ -29,7 +29,29 @@
       "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -t -c \"SELECT id, length\\(content\\) FROM \"\"Post\"\" WHERE slug = ''what-is-security-information-event-management-sys'';\")",
       "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -t -A -c \"SELECT content FROM \"\"Post\"\" WHERE id = ''cmn8bwpq60000tox4oo6fzs0d'';\")",
       "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -t -A -c \"SELECT substring\\(content, 1, 200\\) FROM \"\"Post\"\" WHERE id = ''cmn8bwpq60000tox4oo6fzs0d'';\")",
-      "Bash(/tmp/siem_content_v2.html:*)"
+      "Bash(/tmp/siem_content_v2.html:*)",
+      "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -t -A -c \":*)",
+      "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog << 'SQL':*)",
+      "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -c \":*)",
+      "Bash(python3 -m json.tool)",
+      "Bash(/var/www/Blog/scripts/scripts/restart-frontend.sh)",
+      "Bash(curl -s https://blog.securemango.com/)",
+      "Bash(identify /var/www/Blog/FE-Blog/public/uploads/1774618080937-siem.webp)",
+      "Bash(pip3 install:*)",
+      "Bash(npm list:*)",
+      "Bash(identify /var/www/Blog/uploads/1774618080937-siem.webp)",
+      "Bash(/tmp/gen_dns_tunneling.svg:*)",
+      "Bash(echo \"DNS tunneling image: $?\")",
+      "Bash(/tmp/gen_service_account.svg:*)",
+      "Bash(echo \"Service account image: $?\")",
+      "Bash(/tmp/gen_zero_trust.svg:*)",
+      "Bash(echo \"Zero trust image: $?\")",
+      "Bash(ls -lh /var/www/Blog/uploads/blog-*.webp)",
+      "Bash(for f:*)",
+      "Bash(do identify:*)",
+      "Bash(done)",
+      "Bash(lscpu)",
+      "Bash(/var/www/Blog/scripts/restart-backend.sh)"
     ]
   }
 }
