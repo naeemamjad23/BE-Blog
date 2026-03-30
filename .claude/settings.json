@@ -54,7 +54,12 @@
       "Bash(/var/www/Blog/scripts/restart-backend.sh)",
       "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -c 'SELECT id, LEFT\\(title, 60\\) as title, \"\"publishedAt\"\", \"\"createdAt\"\" FROM \"\"Post\"\" ORDER BY \"\"createdAt\"\" ASC;')",
       "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog <<'SQL':*)",
-      "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -c 'SELECT LEFT\\(title, 55\\) as title, \"\"publishedAt\"\" FROM \"\"Post\"\" ORDER BY \"\"publishedAt\"\" ASC;')"
+      "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -c 'SELECT LEFT\\(title, 55\\) as title, \"\"publishedAt\"\" FROM \"\"Post\"\" ORDER BY \"\"publishedAt\"\" ASC;')",
+      "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -c ':*)",
+      "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -f /tmp/insert_articles.sql)",
+      "Bash(chmod +x /tmp/insert_articles.sh)",
+      "Bash(dpkg -l)",
+      "Bash(identify /var/www/Blog/uploads/blog-dns-tunneling.webp /var/www/Blog/uploads/blog-zero-trust.webp /var/www/Blog/uploads/blog-sast-dast-iast.webp)"
     ]
   }
 }
