@@ -59,7 +59,12 @@
       "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -f /tmp/insert_articles.sql)",
       "Bash(chmod +x /tmp/insert_articles.sh)",
       "Bash(dpkg -l)",
-      "Bash(identify /var/www/Blog/uploads/blog-dns-tunneling.webp /var/www/Blog/uploads/blog-zero-trust.webp /var/www/Blog/uploads/blog-sast-dast-iast.webp)"
+      "Bash(identify /var/www/Blog/uploads/blog-dns-tunneling.webp /var/www/Blog/uploads/blog-zero-trust.webp /var/www/Blog/uploads/blog-sast-dast-iast.webp)",
+      "Bash(find /var/www/Blog/BE-Blog/src -type f \\\\\\(-name *.ts -o -name *.js \\\\\\))",
+      "Bash(find /var/www/Blog -type f -name *media* -o -name *upload* -o -name *image*)",
+      "Bash(grep -r \"TODO\\\\|FIXME\\\\|XXX\\\\|HACK\" /var/www/Blog/BE-Blog/src --include=*.ts)",
+      "Bash(env)",
+      "Bash(ls -la /var/www/Blog/uploads/blog-*.webp)"
     ]
   }
 }
