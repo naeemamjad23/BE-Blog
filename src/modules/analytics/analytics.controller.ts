@@ -20,4 +20,28 @@ export class AnalyticsController {
   recentSubscribers(@Query('limit') limit?: string) {
     return this.analyticsService.recentSubscribers(limit ? parseInt(limit) : 10);
   }
+
+  @Get('posts-by-day')
+  postsByDay(@Query('days') days?: string) {
+    return this.analyticsService.postsByDay(days ? parseInt(days) : 30);
+  }
+
+  @Get('subscribers-by-day')
+  subscribersByDay(@Query('days') days?: string) {
+    return this.analyticsService.subscribersByDay(days ? parseInt(days) : 30);
+  }
+
+  @Get('views-by-domain')
+  viewsByDomain() { return this.analyticsService.viewsByDomain(); }
+
+  @Get('subscribers-by-source')
+  subscribersBySource() { return this.analyticsService.subscribersBySource(); }
+
+  @Get('affiliate-stats')
+  affiliateStats() { return this.analyticsService.affiliateStats(); }
+
+  @Get('comments-by-day')
+  commentsByDay(@Query('days') days?: string) {
+    return this.analyticsService.commentsByDay(days ? parseInt(days) : 30);
+  }
 }

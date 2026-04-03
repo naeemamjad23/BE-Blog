@@ -42,8 +42,9 @@ model Post {
   seriesOrder Int?
   authorId    String
   author      Author    @relation(fields: [authorId], references: [id])
-  tags        PostTag[]
-  comments    Comment[]
+  tags            PostTag[]
+  comments        Comment[]
+  affiliateLinks  AffiliateLink[]
 
   // Tracking
   viewCount   Int @default(0)
@@ -121,17 +122,35 @@ model PostTag {
 // --- Lead Generation ---
 
 model Subscriber {
+  id                String   @id @default(cuid())
+  email             String   @unique
+  name              String?
+  source            String?
+  leadMagnet        String?
+  domainInterests   String[]
+  verified          Boolean  @default(false)
+  verificationToken String?  @unique
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([email])
+}
+
+// --- Monetization ---
+
+model AffiliateLink {
   id              String   @id @default(cuid())
-  email           String   @unique
-  name            String?
-  source          String?
-  leadMagnet      String?
-  domainInterests String[]
-  verified        Boolean  @default(false)
+  url             String
+  productName     String
+  network         String?
+  postId          String?
+  post            Post?    @relation(fields: [postId], references: [id], onDelete: SetNull)
+  clickCount      Int      @default(0)
+  conversionCount Int      @default(0)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  @@index([email])
+  @@index([postId])
 }
 
 model LeadMagnet {

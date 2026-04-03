@@ -19,6 +19,8 @@ import { CommentsModule } from './modules/comments/comments.module.js';
 import { AnalyticsModule } from './modules/analytics/analytics.module.js';
 import { SitemapModule } from './modules/sitemap/sitemap.module.js';
 import { RssModule } from './modules/rss/rss.module.js';
+import { EmailModule } from './modules/email/email.module.js';
+import { AffiliateLinksModule } from './modules/affiliate-links/affiliate-links.module.js';
 
 @Module({
   imports: [
@@ -41,6 +43,8 @@ import { RssModule } from './modules/rss/rss.module.js';
     AnalyticsModule,
     SitemapModule,
     RssModule,
+    EmailModule,
+    AffiliateLinksModule,
   ],
   providers: [
     { provide: APP_GUARD, useClass: JwtAuthGuard },

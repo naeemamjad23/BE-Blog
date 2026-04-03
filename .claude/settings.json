@@ -64,7 +64,19 @@
       "Bash(find /var/www/Blog -type f -name *media* -o -name *upload* -o -name *image*)",
       "Bash(grep -r \"TODO\\\\|FIXME\\\\|XXX\\\\|HACK\" /var/www/Blog/BE-Blog/src --include=*.ts)",
       "Bash(env)",
-      "Bash(ls -la /var/www/Blog/uploads/blog-*.webp)"
+      "Bash(ls -la /var/www/Blog/uploads/blog-*.webp)",
+      "Bash(curl -s http://localhost:4001/api/posts?limit=3)",
+      "Bash(curl -s http://localhost:4001/api/posts?limit=2)",
+      "Bash(curl -s http://127.0.0.1:4001/api/posts?limit=2)",
+      "Bash(curl -s http://localhost:4000/api/posts?limit=2)",
+      "Bash(grep -r \"NEXT_PUBLIC_API\" /var/www/Blog/FE-Blog/.env*)",
+      "Bash(curl -s http://localhost:4000/posts?limit=2)",
+      "Bash(cat /var/www/Blog/nginx/*.conf)",
+      "Bash(pnpm build:*)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(curl -s http://localhost:4001/api/posts?limit=16)",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(f''''Total posts: {data[\"\"pagination\"\"][\"\"total\"\"]}''''\\); [print\\(f''''  {p[\"\"publishedAt\"\"][:10]} - {p[\"\"title\"\"][:60]}''''\\) for p in data[''''posts'''']]\")",
+      "Bash(curl -s http://localhost:3001/)"
     ]
   }
 }

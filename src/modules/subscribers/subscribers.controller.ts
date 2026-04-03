@@ -16,6 +16,12 @@ export class SubscribersController {
   }
 
   @Public()
+  @Get('verify/:token')
+  verify(@Param('token') token: string) {
+    return this.subscribersService.verify(token);
+  }
+
+  @Public()
   @Delete('unsubscribe/:email')
   unsubscribe(@Param('email') email: string) {
     return this.subscribersService.unsubscribe(email);
