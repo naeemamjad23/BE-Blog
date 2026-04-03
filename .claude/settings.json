@@ -76,7 +76,8 @@
       "Bash(curl -s http://localhost:3000)",
       "Bash(curl -s http://localhost:4001/api/posts?limit=16)",
       "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(f''''Total posts: {data[\"\"pagination\"\"][\"\"total\"\"]}''''\\); [print\\(f''''  {p[\"\"publishedAt\"\"][:10]} - {p[\"\"title\"\"][:60]}''''\\) for p in data[''''posts'''']]\")",
-      "Bash(curl -s http://localhost:3001/)"
+      "Bash(curl -s http://localhost:3001/)",
+      "Bash(PGPASSWORD=MU27EF9R7e02MluR133JKICF psql -h localhost -U securemango -d securemango_blog -c \"SELECT id, name FROM \"\"Domain\"\" ORDER BY name;\")"
     ]
   }
 }
